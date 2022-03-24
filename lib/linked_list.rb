@@ -24,8 +24,14 @@ class LinkedList
 
     node.value = value
 
-    node.next = @tail
-    @tail = node
+    if !tail.nil?
+      @tail.next = node
+      @tail = node
+      node.next = nil
+    else
+      @tail = node
+      node.next = @tail.next
+    end
 
     return unless @head.nil?
 
@@ -58,6 +64,17 @@ class LinkedList
       size(current_node.next, coun)
     end
   end
+
+  def at(index, current_node = @head, coun = 0)
+    if index > (size - 1)
+      nil
+    elsif coun.zero? == index
+      current_node
+    else
+      coun += 1
+      at(index, current_node.next, coun)
+    end
+  end
 end
 
 linked_list = LinkedList.new
@@ -66,7 +83,11 @@ linked_list.append(80)
 
 linked_list.prepend(70)
 
-# p linked_list.size
+linked_list.append(60)
+
+linked_list.prepend(100)
 
 p linked_list.head
 p linked_list.tail
+
+# p linked_list.at(1)
