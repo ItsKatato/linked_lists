@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # Node class thats used for node creation
 class Node
@@ -49,7 +49,7 @@ class LinkedList
     return unless @tail.nil?
 
     @tail = node
-    node.next = tail
+    node.next = nil
   end
 
   def size(current_node = @head, coun = 0)
@@ -106,6 +106,16 @@ class LinkedList
       find(value, index, current_node.next)
     end
   end
+
+  def to_s(current_node = head, str = '')
+    if current_node.next.nil?
+      str << "(#{current_node.value}) -> nil"
+      str
+    else
+      str << "(#{current_node.value}) -> "
+      to_s(current_node.next, str)
+    end
+  end
 end
 
 linked_list = LinkedList.new
@@ -120,3 +130,5 @@ linked_list.prepend(100)
 
 # p linked_list.head
 # p linked_list.tail
+
+p linked_list.to_s
