@@ -85,6 +85,16 @@ class LinkedList
       pop(current_node.next)
     end
   end
+
+  def contains?(value, current_node = @head)
+    if current_node.value == value
+      true
+    elsif current_node.next.nil?
+      false
+    else
+      contains?(value, current_node.next)
+    end
+  end
 end
 
 linked_list = LinkedList.new
@@ -99,5 +109,7 @@ linked_list.prepend(100)
 
 linked_list.pop
 
-p linked_list.head
-p linked_list.tail
+# p linked_list.head
+# p linked_list.tail
+
+p linked_list.contains?(200)
