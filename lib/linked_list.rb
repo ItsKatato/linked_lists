@@ -95,6 +95,17 @@ class LinkedList
       contains?(value, current_node.next)
     end
   end
+
+  def find(value, index = 0, current_node = @head)
+    if current_node.value == value
+      index
+    elsif current_node.next.nil?
+      nil
+    else
+      index += 1
+      find(value, index, current_node.next)
+    end
+  end
 end
 
 linked_list = LinkedList.new
@@ -107,9 +118,5 @@ linked_list.append(60)
 
 linked_list.prepend(100)
 
-linked_list.pop
-
 # p linked_list.head
 # p linked_list.tail
-
-p linked_list.contains?(200)
