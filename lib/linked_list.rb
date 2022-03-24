@@ -68,11 +68,21 @@ class LinkedList
   def at(index, current_node = @head, coun = 0)
     if index > (size - 1)
       nil
-    elsif coun.zero? == index
+    elsif coun == index
       current_node
     else
       coun += 1
       at(index, current_node.next, coun)
+    end
+  end
+
+  def pop(current_node = @head)
+    if current_node.next == @tail
+      @tail = nil
+      current_node.next = @tail
+      @tail = current_node
+    else
+      pop(current_node.next)
     end
   end
 end
@@ -87,7 +97,7 @@ linked_list.append(60)
 
 linked_list.prepend(100)
 
+linked_list.pop
+
 p linked_list.head
 p linked_list.tail
-
-# p linked_list.at(1)
